@@ -9,7 +9,15 @@ app.use("/hello", ( req, res )=>{
     res.send("hello server");
 })
 
-app.use("/test", ( req, res )=>{
+app.use("/ab?c", ( req, res )=>{
+    res.send("hello form server")
+})
+
+app.use("/ab+c", ( req, res )=>{
+    res.send("hello server")
+})
+
+app.use("/ab*c", ( req, res )=>{
     res.send("hello form server")
 })
 
