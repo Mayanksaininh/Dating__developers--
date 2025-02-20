@@ -21,12 +21,16 @@ app.use("/ab*c", ( req, res )=>{
     res.send("hello form server")
 })
 
-app.use("///" , (req, res)=>{
-    res.send("hello dost")
-})
-app.get("/user" , (req,res) =>{
-    res.send({firstname : "mayank" , lastname : "saini"})
-})
+
+app.get("/user" , (req,res,next) =>{
+    // res.send({firstname : "mayank" , lastname : "saini"})
+    next();
+},
+(req,res)=>{
+    res.send("ush");
+    res.send("welding");
+}
+)
 
 app.post("/user" , (req,res) =>{
     res.send("saved in DB succesfully")
@@ -38,4 +42,4 @@ app.delete("/user", (req,res) =>{
 
 app.listen(3000, ()=>{
     console.log("Server is succesfully listening on port 3000")
-});
+}); 
