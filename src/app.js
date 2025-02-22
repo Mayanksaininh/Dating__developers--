@@ -39,33 +39,18 @@ app.post("/user" , (req,res) =>{
 app.delete("/user", (req,res) =>{
     res.send("user is deleted ")
 })
+const {adminauth}  = require("./middleware/auth")
 
 app.listen(3000, ()=>{
     console.log("Server is succesfully listening on port 3000")
 }); 
-app.get("/admin/getalldata" , (req,res) => {
+app.get("/admin/user " , adminauth)
 
-    // check the request is authenticated, if it is actually from the admin side
-    const token = "xyz"
-    const isadminAuthorized = token ==="xyz"
-    if(isadminAuthorized){
-        res.send("All data sent")
-    }
-    else{
-        res.status(401).send("unauthorized data")
-    }
-    // res.send("Get all data")
-
+app.get("/admin/data", (req,res) => {
+    res.send("Get all data")
 })
 
 app.delete("/admin/deleteuser", (req,res) => {
      // check the request is authenticated, if it is actually from the admin side
-     const token = "xyz"
-     const isadminAuthorized = token ==="xyz"
-     if(isadminAuthorized){
-         res.send("All data delete")
-     }
-     else{
-         res.status(404).send("unauthorized data")
-     }
+     res.send("detele user")
 })
