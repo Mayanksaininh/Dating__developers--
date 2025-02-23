@@ -28,7 +28,7 @@ app.get("/user" , (req,res,next) =>{
 },
 (req,res)=>{
     res.send("ush");
-    res.send("welding");
+    // res.send("welding");
 }
 )
 
@@ -44,7 +44,7 @@ const {adminauth}  = require("./middleware/auth")
 app.listen(3000, ()=>{
     console.log("Server is succesfully listening on port 3000")
 }); 
-app.get("/admin/user " , adminauth)
+app.use("/use" , adminauth)
 
 app.get("/admin/data", (req,res) => {
     res.send("Get all data")
@@ -53,4 +53,10 @@ app.get("/admin/data", (req,res) => {
 app.delete("/admin/deleteuser", (req,res) => {
      // check the request is authenticated, if it is actually from the admin side
      res.send("detele user")
+})
+
+app.get("/" , (err,req,res,next) =>{
+    if(err){
+        res.status(500).send("Something went worng")
+    }
 })
