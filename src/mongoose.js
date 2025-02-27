@@ -7,7 +7,7 @@ const connectdb  = async() =>{
 // this async function return us the promise
 
 connectdb().then(()=>{
-
-}).catch(error =>{
-    
+    console.log("database connection established....")
+}).catch((err) =>{
+    console.error("database cannot be established....")
 })
