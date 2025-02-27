@@ -44,7 +44,9 @@ const {adminauth}  = require("./middleware/auth")
 app.listen(3000, ()=>{
     console.log("Server is succesfully listening on port 3000")
 }); 
-app.use("/use" , adminauth)
+app.use("/use" , adminauth, (req,res) => {
+    res.send("df");
+})
 
 app.get("/admin/data", (req,res) => {
     res.send("Get all data")

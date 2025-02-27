@@ -1,6 +1,6 @@
 const {MongoClient}  = require('mongodb')
 
-const url = 'mongodb+srv://mayanksaininh:<db_password>@myjourney.tntrf.mongodb.net/';
+const url = 'mongodb+srv://mayanksaininh:mayanksaininh@myjourney.tntrf.mongodb.net';
 const client  = new MongoClient(url)
 
 const dbName = 'Firstdb';
