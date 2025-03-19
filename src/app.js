@@ -1,10 +1,23 @@
 const express = require('express');
 
 const app = express();
+const connectdb = require("./database")
 
 // app.use('/', (req,res) => {
 //     res.send("server is UP and running");
 // })
+
+connectdb.then(()=>{
+    console.log("Database connection established...")
+    app.listen(3000, ()=>{
+        console.log("Server is successfully listening on port 3000")
+    })
+ })
+ .catch(()=>{
+   console.error("Database can't be connected")
+ })
+
+
 app.use("/hello", ( req, res )=>{
     res.send("hello server");
 })
@@ -41,9 +54,6 @@ app.delete("/user", (req,res) =>{
 })
 const {adminauth}  = require("./middleware/auth")
 
-app.listen(3000, ()=>{
-    console.log("Server is succesfully listening on port 3000")
-}); 
 app.use("/use" , adminauth, (req,res) => {
     res.send("df");
 })
