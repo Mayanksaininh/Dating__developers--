@@ -22,9 +22,20 @@ app.post("/signup" , async(req, res) =>{
    try {await user.save() 
    res.send("User added successfully")
    }
-   catch{
+   catch(error){
     res.status(404).send("user is not added");
    }
+})
+app.get("/user", async(req,res)=>{
+    const userid = req.body.emailID
+
+    try{
+       const user =  await user.find({emailID : userid})
+       res.send(user)
+    }
+    catch(error){
+        res.status(400).send("something went wrong")
+    }
 })
 // app.use('/', (req,res) => {
 //     res.send("server is UP and running");
