@@ -1,11 +1,26 @@
+
+require('dotenv').config();
 const {MongoClient}  = require('mongodb');
+const { $where } = require('./model/user');
 
 
 const connectdb = async()=>{
-  await mongoose.connect("'mongodb+srv://mayanksaininh:mayanksaininh@myjourney.tntrf.mongodb.net/devTinder'")
+  try{
+    const uri  = process.env.mongodb+srv+"://${mayanksaininh}:mayanksaininh@myjourney.tntrf.mongodb.net/devTinder?retryWrites=true&w=majority"
+    if(!uri){
+      console.error('MONGODB_URI environment variable not found.');
+      return;
+    }
+   await mongoose.connect("'mongodb+srv://mayanksaininh:mayanksaininh@myjourney.tntrf.mongodb.net/devTinder'")
+   console.log('Connected to MongoDB')
+}
+catch(error){
+  console.error('Error connecting to MongoDB:', error);
+}
 }
 
 module.exprts = connectdb
+
 
 
 

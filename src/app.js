@@ -23,9 +23,22 @@ app.post("/signup" , async(req, res) =>{
    res.send("User added successfully")
    }
    catch(error){
-    res.status(404).send("user is not added");
+    res.status(400).send("user is not added");
    }
 })
+// feed api to get all data from database
+app.get("/feed", async(req,res)=>{
+    try{
+        const users = await user.find({})
+        // if we leave this is empty then it will send the all users back 
+        res.send(users)
+    }
+    catch(error){
+        res.status(400).send("something went wrong")
+    }
+
+})
+// this api is to one user from database
 app.get("/user", async(req,res)=>{
     const userid = req.body.emailID
 
