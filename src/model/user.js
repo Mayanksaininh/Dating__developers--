@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
         },
     },
     about:{
-        type : string,
+        type : String,
         default : "This is the default about the user",
     },
     skills :{

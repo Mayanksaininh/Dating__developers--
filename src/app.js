@@ -1,10 +1,13 @@
 const express = require('express');
 
 const app = express();
-const connectdb = require("./database")
-const user = require("./model/user")
-// for add user into the database
 
+const user = require("./model/user")
+// const connectDb = require('./database');
+// for add user into the database
+const connectDB = require('./database');
+const dotenv = require("dotenv");
+dotenv.config();
 app.use(express.json())
 
 app.post("/signup" , async(req, res) =>{ 
@@ -50,11 +53,10 @@ app.get("/user", async(req,res)=>{
         res.status(400).send("something went wrong")
     }
 })
-// app.use('/', (req,res) => {
-//     res.send("server is UP and running");
-// })
 
-connectdb()
+
+
+connectDB()
 .then(()=>{
     console.log("Database connection established...")
     app.listen(3000, ()=>{

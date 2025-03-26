@@ -1,27 +1,53 @@
 
 require('dotenv').config();
-const {MongoClient}  = require('mongodb');
-const { $where } = require('./model/user');
+// const mongoose = require('mongoose');
+// const {MongoClient}  = require('mongodb');
+// const { $where } = require('./model/user');
+
+const { default: mongoose } = require("mongoose");
 
 
-const connectdb = async()=>{
-  try{
-    const uri  = process.env.mongodb+srv+"://${mayanksaininh}:mayanksaininh@myjourney.tntrf.mongodb.net/devTinder?retryWrites=true&w=majority"
-    if(!uri){
-      console.error('MONGODB_URI environment variable not found.');
-      return;
+// const connectdb = async()=>{
+  
+//   //  await mongoose.connect("mongodb+srv://mayanksaininh:mayanksaininh@myjourney.tntrf.mongodb.net/devTinder")
+//    await mongoose.connect('mongodb+srv://mayanksaininh:mayanksaininh@myjourney.tntrf.mongodb.net/devTinder');
+//    console.log('Connected to MongoDB')
+// }
+
+
+// const connectDB = async () => {
+//   try {
+//       await mongoose.connect('mongodb+srv://mayanksaininh:mayanksaininh@myjourney.tntrf.mongodb.net/devTinder', {
+//           useNewUrlParser: true,
+//           useUnifiedTopology: true,
+//       });
+//       console.log('MongoDB connected successfully');
+//   } catch (error) {
+//       console.error('MongoDB connection error:', error);
+//       process.exit(1); // Exit process with failure
+//   }
+// };
+
+// connectDB();
+// module.exprts = connectDB;
+const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
+
+const uri = process.env.MONGO_URI;
+
+const connectDB = async () => {
+    try {
+   const con = await mongoose.connect(uri, clientOptions);
+      await mongoose.connection.db.admin().command({ ping: 1 });
+      console.log(`MongoDB Connected: ${con.connection.host}`);
+   
+    } catch (error) {
+      console.error(`Error: ${error.message}`.red.bold);
+      process.exit(1); // Exit with a non-zero status code to indicate an error
     }
-   await mongoose.connect("'mongodb+srv://mayanksaininh:mayanksaininh@myjourney.tntrf.mongodb.net/devTinder'")
-   console.log('Connected to MongoDB')
-}
-catch(error){
-  console.error('Error connecting to MongoDB:', error);
-}
-}
 
-module.exprts = connectdb
+  };
 
-
+  module.exports = connectDB;
 
 
 // const url = 'mongodb+srv://mayanksaininh:mayanksaininh@myjourney.tntrf.mongodb.net/devTinder';
